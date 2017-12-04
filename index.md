@@ -6,7 +6,7 @@ description: Predictive modeling of playlist success
 ---
 
 
-## Introduction:
+
 
 
 [Github Pages](https://pages.github.com) provide a simple way to make a

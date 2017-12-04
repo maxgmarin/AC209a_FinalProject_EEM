@@ -5,6 +5,6 @@ website using Markdown and git.
 
 This is the GitHub repo for the AC209a Final Project.
 
-View the project website [here](https://github.com/maxgmarin/AC209a_FinalProject_EEM).
+View the project website [here](https://maxgmarin.github.io/AC209a_FinalProject_EEM/).
 
 ---

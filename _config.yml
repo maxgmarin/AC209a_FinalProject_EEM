@@ -8,7 +8,7 @@ highlighter: rouge
 # Themes are encouraged to use these universal variables
 # so be sure to set them if your theme uses them.
 #
-title : 209a Final Project: Predictive modeling of playlist success
+title : Predictive modeling of Spotify playlist success
 author :
   name : Max Marin
   email : mgmarin@g.harvard.edu

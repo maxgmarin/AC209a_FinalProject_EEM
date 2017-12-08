@@ -55,7 +55,7 @@ Using the python library Spotipy (a python wrapper for the Spotify API), we obta
 
 When we started exploring the data available through Spotify API in depth, we first found there was information describing the playlist directly, (such as the number of followers, track IDs, or the number of tracks. We then decided that to obtain significant characteristics for prediction we would need to query information about the tracks that comprise the playlist. The extra layers of information we would need to parse are diagramed below in figure 1.
 
-![TestPlot](images/Picture_1.png)</br> 
+![TestPlot](images/Picture_1.png)<br>
 
 Figure 1. A rough schematic of the layers of data available through the spotify API
 
@@ -78,26 +78,50 @@ Engineering predictors from the raw playlist meta data
 
 #### Inferring playlist genre <a name="genre"></a>
 A challenge we faced was that the spotify API did not directly provide any genre classification for their playlists. To overcome this we inferred a playlist’s dominant genre by looking at the artist genre’s associated with all tracks in a playlist. We defined a playlist’s dominant genre as the genre that was best represented across all track’s artist’s genres. 
-</br>
+<br>
 ![TestPlot](images/Picture_2.png)
-</br> 
+<br>
 
 
 ### 2. Exploratory Data Analysis <a name="EDA1"></a>
 
-![TestPlot](images/test.png)</br>
+![TestPlot](images/test.png)<br>
 This is the distribution of the number of followers for each playlist. We can observe that the distribution is left-skewed, and therefore, requires additional transformations before using it as a response variable. 
 
-![TestPlot](images/Picture_4.png)</br>
+![TestPlot](images/Picture_4.png)<br>
 
 The Today’s Top Hits is an outlier. It has more than twice the number of followers of RapCavier which is second in number of followers. (Note: there were some playlists that we couldn’t retrieved from spotify api so some of the top playlists may not be present here).
 
 ### Exploration of audio features <a name="Exploration"></a>
-</br>
+Next, we began to explore audio feature characteristics of all 63902 songs present in our dataset.  Our interest in using audio features come from the fact that audio features are blind to the actual popularity of specific artists or tracks.
+
+The question we asked of the audio features is what is the correlation between all 13 audio features available for each track. What we found was most audio features were not highly correlated in any way (with a few exceptions). Energy and loudness appear to have a strong positive correlation, while energy and acousticness have a strong negative correlation. In general the lack of extremely high correlation between audio features indicates that they are all likely to be informative to our model. 
+<br>
 ![TestPlot](images/Picture_5.png)
-</br> 
+<br>
 
+Next, we looked into the potential for audio features to allow for classification of songs as belonging to specific genres/playlists. To test this we started 3 sets of tracks:
 
+Hot Country: 52 tracks
+Viva Latino: 50 tracks
+Peaceful Piano: 162 tracks
+
+First I asked how well Viva Latino is separated from Peaceful Piano in the first two principal components of the data. I found that they very clearly separated, 
+<br>
+![TestPlot](images/Picture_10.png)
+<br>
+Next, I used a logistic regression classifier to classify tracks as coming from either of the two playlists. The logistic regression classifier performed perfectly differentiating latin pop songs from piano music.
+<br>
+![TestPlot](images/Picture_11.png)
+<br>
+TEXT
+<br>
+![TestPlot](images/Picture_12.png)
+<br>
+
+<br>
+![TestPlot](images/Picture_13.png)
+<br>
 ## 3. Literature Review/Related Work <a name="literature"></a>
 https://towardsdatascience.com/is-my-spotify-music-boring-an-analysis-involving-music-data-and-machine-learning-47550ae931de 
 
@@ -135,25 +159,24 @@ In this method, we first fit a logistic regression model with our training set, 
 
 ##### Results <a name="Resultsa"></a>
 
-</br>
+<br>
 ![TestPlot](images/Picture_6.png)
-</br> 
+<br>
 
-</br>
+<br>
 ![TestPlot](images/Picture_7.png)
-</br> 
+<br>
 
 We can see that our new playlist takes tracks from playlists with relatively low followers if we modify the cost function so that it penalizes more for playlists with large number of followers (blue bar graphs above). We can also see that there are some tracks from the same playlist that was used in the old playlist. This shows that the algorithm doesn’t replace the playlist completely, but I tries to retain certain characters. However, the mean popularity of the tracks in our playlist increased slightly. 
 If we adjust the cost function so that it penalizes more when the playlist is not as successful, we can see that the tracks are obtained from playlists with large number of followers. Note: that the initial playlist used for the two cases were different from each other due to kernel restarting.
 
-</br>
+<br>
 ![TestPlot](images/Picture_8.png)
 </br> 
 
-</br>
+<br>
 ![TestPlot](images/Picture_9.png)
-</br> 
-
+<br>
 
 These plots show that regardless of the cost function the algorithm seeks to generate playlists that have similar mean track popularity.
 

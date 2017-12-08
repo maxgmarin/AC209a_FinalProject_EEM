@@ -114,7 +114,8 @@ Next, I used a logistic regression classifier to classify tracks as coming from 
 <br>
 ![TestPlot](images/Picture_11.png)
 <br>
-TEXT
+I next performed a similar comparison of Viva Latino and Hot Country. I found that latin pop music was qualitatively not as separable, but still distinguishable in PCA space. The logistic regression classifier performed decently (Test Accuracy = 88.2%).
+
 <br>
 ![TestPlot](images/Picture_12.png)
 <br>
@@ -189,20 +190,7 @@ TEXT
 #### Building a Playlist: <a name="buildplaylist"></a>
 The approach we’ve taken was somewhat naive. We worked under the assumption that the spotify user has an eclectic taste for tracks which is why we seeded a randomly generated playlist to our algorithm. In reality, we know individuals want tracks related to the ones they liked. Therefore, for future work, we should limit our tracks we incorporate to our playlist to ones that are related to each other. The similar tracks can be obtained through spotify recommendations or we can take a mathematical approach in which calculate the “distance” between tracks using metrics such as Frobenius Distance. Furthermore, there are several parameters that we can tweak to generate a better playlist such as the “temperature” and “cooling length”. For example, increasing the cooling time will give our system enough time to find the global minimum. Finally, the model we used for generating the playlist just uses a subset of all our features. In the future, we can rerun this algorithm with an expanded feature and also try out different classification models other than the one used in the algorithm.
 
-## Another paragraph <a name="paragraph2"></a>
-The second paragraph text
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
 - [Project Overview](pages/overview.html)
 - [Data sources/processing](pages/independent_site.html)
 - [Exploratory Data Analysis of Spotify Data](pages/user_site.html)

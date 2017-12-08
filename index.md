@@ -57,8 +57,7 @@ Here is the Jupyter notebook where all audio features were obtained through the 
 ### 2. Exploratory Data Analysis <a name="EDA1"></a>
 Some text <br>
 
-![Drag Racing](images/TestPlot_1.png)
-
+![TestPlot](images/TestPlot_1.png)
 
 
 ### Sub paragraph <a name="subparagraph1"></a>

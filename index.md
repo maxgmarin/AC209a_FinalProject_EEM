@@ -8,6 +8,7 @@ description: Predictive modeling of playlist success
 # AC209a Final Report: Predicting playlist success on the Spotify platform
 
 #### Group Members: Max, Erica, and Elmer
+#### Group Number: 58
 
 
 
@@ -126,35 +127,32 @@ I next performed a similar comparison of Viva Latino and Hot Country. I found th
 <br>
 ![TestPlot](images/Picture_13.png)
 <br>
-## 3. Literature Review/Related Work <a name="literature"></a>
-https://towardsdatascience.com/is-my-spotify-music-boring-an-analysis-involving-music-data-and-machine-learning-47550ae931de 
 
-http://spotipy.readthedocs.io/en/latest/#installation 
-
-https://developer.spotify.com/web-api/tutorial/ 
-
-http://www.sciencedirect.com/science/article/pii/S0020025507004045
-
-https://github.com/perrygeo/simanneal/blob/master/simanneal/anneal.py
-
-## 4. Modeling Approach and Project Trajectory <a name="approach"></a>
+## 3. Modeling Approach and Project Trajectory <a name="approach"></a>
 ### Null Model <a name="null"></a>
 We started off our project by building a simple null model that simply just uses the average # of followers of the training set as a prediction for any playlist.
 We found that this null model performed poorly (Test R^2 = -1e-2) and show no predictive ability.
 This provided us with a reference for the performance of a model that uses no predictors. Instead this model is just using the response variables of the training set to predict the response of variables of the test set. If the use of a predictor increases test performance by any amount above R^2 =0 this is an indication that this predictor yields some predictive power.
 ### Regression Models <a name="regression"></a>
 
+	We explored a simple linear regression model, and found the results poor (R2 less than 0 for the validation set). We determined that we needed to use dimensionality reduction, so we tried Lasso and Ridge regression techniques, and also PCA. Ridge and Lasso regression gave R2 values around 0.2, much better than baseline! 
+	We wanted to also explore if transforming the response variable would impact our model’s predictive success, since we saw that the playlist followers appeared to have a skewed distribution (as shown in exploratory data analysis). We tried the square root, cubic root, log (base 10), and inverse of the response variable and trained models. We saw that the R2 values for Ridge and Lasso Regression were higher given a square root or cubic root transformation. The best performance was Lasso Regression using a transformed response variable of square root. 
 <br>
 ![TestPlot](images/Picture_14.png)
 <br>
+Linear regression with Lasso regression, using the square root-transformed response variable seems like our best model. But we want to know how it's working - what are the important features? For linear regression, we found 19 parameters with a p value of <0.05, mostly containing genre information, audio feature information, and some spotify features, such as recommendations. The most significant features by far (p values 1e-16) were for newly-released tracks (a feature we engineered from date of release) and one for spotify-featured playlists. The using spotify's featured playlists as a parameter seems like a poor way to move forward with using this model to generate a successful playlist, since we can't control whether or not spotify features it, and that seems cheap anyway, we want our playlist to be successful because it's good, not because spotify features it. We also looked at the nonzero coefficients from Lasso regression, seen below. There were some different trends, but we still saw that spotify’s featured playlists dominated (the third-largest coefficient). 
 
-	We explored a simple linear regression model, and found the results poor (R2 less than 0 for the validation set). We determined that we needed to use dimensionality reduction, so we tried Lasso and Ridge regression techniques, and also PCA. Ridge and Lasso regression gave R2 values around 0.2, much better than baseline! 
-	We wanted to also explore if transforming the response variable would impact our model’s predictive success, since we saw that the playlist followers appeared to have a skewed distribution (as shown in exploratory data analysis). We tried the square root, cubic root, log (base 10), and inverse of the response variable and trained models. We saw that the R2 values for Ridge and Lasso Regression were higher given a square root or cubic root transformation. The best performance was Lasso Regression using a transformed response variable of square root. 
+<br>
+![TestPlot](images/Picture_15.png)
+<br>
+For the rest of the project we will NOT use any attributes (track, artist, album) that directly tell tell the model anything about popularity or followers. This will result in technically a model with test performance, but we believe that the model that is produced without using popularity/followers will be better identifying attributes that truly make a playlist more popular with users. So, we tried using the square root transformed response variable, and building lasso regression model. Our R2 value was less than 0.
+So, we decided to remove spotify-featured playlists from the dataset. Using playlists that have been featured on spotify might be biasing our dataset. There may be a trend between the features of a playlist and its number of followers that is obscured by the inflation playlist followers gets after it has been featured. Since the distribution of these playlist follower values was different, we tried building models using both un-transformed and transformed response variables. Interestingly, we found we got an R2 value less than 0 for the transformed response variables, but we got an R2 value of 0.11 when we used un-transformed response variable. Again, we used lasso regression.  Unfortunately, we saw that there were few non-zero coefficients. 
+<br>
+![TestPlot](images/Picture_15.png)
+<br>
 
-
-## 5. Results, Conclusions, and Future Work <a name="results future"></a>
+## 4. Results, Conclusions, and Future Work <a name="results future"></a>
 ### Results <a name="results"></a>
-
 #### Building a playlist <a name="building_playlist"></a>
 ##### Introduction <a name="introduc"></a>
 To suggest a new playlist to a user, we implemented an algorithm called Simulated Annealing. This is a global optimization approach inspired from a concept in statistical physics. The algorithm essentially describes the motion of molecules when it is heated up to large temperature and when the system is cooled. The idea here is that the molecules will reach a global minimum energy point after cooling, and hence, we can use it a global optimization method.  
@@ -189,11 +187,22 @@ These plots show that regardless of the cost function the algorithm seeks to gen
 
 ### Future Work <a name="futurework"></a>
 #### Improving our predictive model for playlist success: <a name="predictivemodel"></a>
-TEXT
+A major challenge that we faced when developing a predictive model for playlist success is that a playlists success on the Spotify platform is largely dependent on how well advertised it is on the Spotify main page and in different genre categories. This creates a platform where there is preferential exposure for specific artists. An interesting future direction for this work would be to expand the analysis to playlists created by spotify users. This would provide 2 benefits over using Spotify’s public playlists. 1) It would mean that their would be less bias in exposure to the Spotify user base, and 2) there are several orders of magnitude more playlists published by the Spotify user base.
 
 #### Building a Playlist: <a name="buildplaylist"></a>
 The approach we’ve taken was somewhat naive. We worked under the assumption that the spotify user has an eclectic taste for tracks which is why we seeded a randomly generated playlist to our algorithm. In reality, we know individuals want tracks related to the ones they liked. Therefore, for future work, we should limit our tracks we incorporate to our playlist to ones that are related to each other. The similar tracks can be obtained through spotify recommendations or we can take a mathematical approach in which calculate the “distance” between tracks using metrics such as Frobenius Distance. Furthermore, there are several parameters that we can tweak to generate a better playlist such as the “temperature” and “cooling length”. For example, increasing the cooling time will give our system enough time to find the global minimum. Finally, the model we used for generating the playlist just uses a subset of all our features. In the future, we can rerun this algorithm with an expanded feature and also try out different classification models other than the one used in the algorithm.
 
+
+## 5. Literature Review/Related Work <a name="literature"></a>
+https://towardsdatascience.com/is-my-spotify-music-boring-an-analysis-involving-music-data-and-machine-learning-47550ae931de 
+
+http://spotipy.readthedocs.io/en/latest/#installation 
+
+https://developer.spotify.com/web-api/tutorial/ 
+
+http://www.sciencedirect.com/science/article/pii/S0020025507004045
+
+https://github.com/perrygeo/simanneal/blob/master/simanneal/anneal.py
 
 - [Project Overview](pages/overview.html)
 - [Data sources/processing](pages/independent_site.html)

@@ -135,8 +135,8 @@ We found that this null model performed poorly (Test R^2 = -1e-2) and show no pr
 This provided us with a reference for the performance of a model that uses no predictors. Instead this model is just using the response variables of the training set to predict the response of variables of the test set. If the use of a predictor increases test performance by any amount above R^2 =0 this is an indication that this predictor yields some predictive power.
 ### Regression Models <a name="regression"></a>
 
-	We explored a simple linear regression model, and found the results poor (R2 less than 0 for the validation set). We determined that we needed to use dimensionality reduction, so we tried Lasso and Ridge regression techniques, and also PCA. Ridge and Lasso regression gave R2 values around 0.2, much better than baseline! 
-	We wanted to also explore if transforming the response variable would impact our model’s predictive success, since we saw that the playlist followers appeared to have a skewed distribution (as shown in exploratory data analysis). We tried the square root, cubic root, log (base 10), and inverse of the response variable and trained models. We saw that the R2 values for Ridge and Lasso Regression were higher given a square root or cubic root transformation. The best performance was Lasso Regression using a transformed response variable of square root. 
+We explored a simple linear regression model, and found the results poor (R2 less than 0 for the validation set). We determined that we needed to use dimensionality reduction, so we tried Lasso and Ridge regression techniques, and also PCA. Ridge and Lasso regression gave R2 values around 0.2, much better than baseline! 
+We wanted to also explore if transforming the response variable would impact our model’s predictive success, since we saw that the playlist followers appeared to have a skewed distribution (as shown in exploratory data analysis). We tried the square root, cubic root, log (base 10), and inverse of the response variable and trained models. We saw that the R2 values for Ridge and Lasso Regression were higher given a square root or cubic root transformation. The best performance was Lasso Regression using a transformed response variable of square root. 
 <br>
 ![TestPlot](images/Picture_14.png)
 <br>
@@ -148,8 +148,14 @@ Linear regression with Lasso regression, using the square root-transformed respo
 For the rest of the project we will NOT use any attributes (track, artist, album) that directly tell tell the model anything about popularity or followers. This will result in technically a model with test performance, but we believe that the model that is produced without using popularity/followers will be better identifying attributes that truly make a playlist more popular with users. So, we tried using the square root transformed response variable, and building lasso regression model. Our R2 value was less than 0.
 So, we decided to remove spotify-featured playlists from the dataset. Using playlists that have been featured on spotify might be biasing our dataset. There may be a trend between the features of a playlist and its number of followers that is obscured by the inflation playlist followers gets after it has been featured. Since the distribution of these playlist follower values was different, we tried building models using both un-transformed and transformed response variables. Interestingly, we found we got an R2 value less than 0 for the transformed response variables, but we got an R2 value of 0.11 when we used un-transformed response variable. Again, we used lasso regression.  Unfortunately, we saw that there were few non-zero coefficients. 
 <br>
-![TestPlot](images/Picture_15.png)
+![TestPlot](images/Picture_16.png)
 <br>
+We tested this model on the test set and found an R2 value of 0.13, which we thought was quite good compared to our null model, considering we didn’t use any popularities, followers, or spotify featured/recommended parameters for prediction. We also tried some classification modeling predicting successful or not successful playlists, when tested on our test set, we saw and AUC on our ROC curve of 0.77, again, this model used the same features. 
+<br>
+![TestPlot](images/Picture_17.png)
+<br>
+
+In the future, we would have liked to have spent more time engineering features, and preferably focusing on the audio features.   
 
 ## 4. Results, Conclusions, and Future Work <a name="results future"></a>
 ### Results <a name="results"></a>

@@ -51,7 +51,7 @@ Some text
 
 
 Here is the Jupyter notebook where all audio features were obtained through the Spotify API: <br>
-[ParsingAll_AudioFeatures_120417](pages/ParsingAll_AudioFeatures_120417.html)
+[ParsingAll_AudioFeatures_120417](notebook_Markdown/ParsingAll_AudioFeatures_120417.html)
 
 
 ### 2. Exploratory Data Analysis <a name="EDA1"></a>

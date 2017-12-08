@@ -55,10 +55,9 @@ Here is the Jupyter notebook where all audio features were obtained through the 
 
 
 ### 2. Exploratory Data Analysis <a name="EDA1"></a>
-Some text <br>
 
 ![TestPlot](images/test.png)
-
+This is the distribution of the number of followers for each playlist. We can observe that the distribution is left-skewed, and therefore, requires additional transformations before using it as a response variable. 
 
 ### Sub paragraph <a name="subparagraph1"></a>
 This is a sub paragraph, formatted in heading 3 style
@@ -72,6 +71,7 @@ This is a sub paragraph, formatted in heading 3 style
 
 ### Conclusion <a name="conclusion"></a>
 
+### Future Work <a name="futurework"></a>
 #### Building a Playlist: <a name="buildplaylist"></a>
 The approach we’ve taken was somewhat naive. We worked under the assumption that the spotify user has an eclectic taste for tracks which is why we seeded a randomly generated playlist to our algorithm. In reality, we know individuals want tracks related to the ones they liked. Therefore, for future work, we should limit our tracks we incorporate to our playlist to ones that are related to each other. The similar tracks can be obtained through spotify recommendations or we can take a mathematical approach in which calculate the “distance” between tracks using metrics such as Frobenius Distance. Furthermore, there are several parameters that we can tweak to generate a better playlist such as the “temperature” and “cooling length”. For example, increasing the cooling time will give our system enough time to find the global minimum. Finally, the model we used for generating the playlist just uses a subset of all our features. In the future, we can rerun this algorithm with an expanded feature and also try out different classification models other than the one used in the algorithm.
 

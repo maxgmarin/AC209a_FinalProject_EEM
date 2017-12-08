@@ -26,6 +26,10 @@ Hello, welcome to our website for our data science final project.
 2. [Introduction and Description of Data](#introduction)
     1. [Sub paragraph](#subparagraph1)
 
+
+Here is the Jupyter notebook where all audio features were obtained through the Spotify API: <br>
+[ParsingAll_AudioFeatures_120417](pages/ParsingAll_AudioFeatures_120417.html)
+
 3. [Literature Review/Related Work](#paragraph2)
 
 4. [Modeling Approach and Project Trajectory](#paragraph2)

@@ -64,9 +64,9 @@ Figure 1. A rough schematic of the layers of data available through the spotify 
 
 For each of the 1587 playlists we then obtained the meta-data of following associated information:
 
-- All tracks information associated with each playlist
-- All audio features associated with each track
-- All artist information associated with each track
+- All tracks information associated with each playlist ( 63902 tracks)
+- All audio features associated with each track (63902 tracks )
+- All artist information associated with each track ( 20139 artists)
 - All album information associated with each track
 
 
@@ -75,12 +75,12 @@ Here is the Jupyter notebook where all audio features were obtained through the 
 
 For details as to the exact metadata available for each playlist, track, artist, or album refer to the Spotify API Object Model documentation. (https://developer.spotify.com/web-api/object-model/)
 
-After obtaining all the above associated information stored for each playlist, the following 
 
-Engineering predictors from the raw playlist meta data
+#### Creating predictors from the raw API data <a name="rawapi"></a>
+
 
 #### Inferring playlist genre <a name="genre"></a>
-A challenge we faced was that the spotify API did not directly provide any genre classification for their playlists. To overcome this we inferred a playlist’s dominant genre by looking at the artist genre’s associated with all tracks in a playlist. We defined a playlist’s dominant genre as the genre that was best represented across all track’s artist’s genres. 
+A challenge we faced was that the spotify API did not directly provide any genre classification for their playlists. To overcome this we inferred a playlist’s dominant genre by looking at the artist genre’s associated with all tracks in a playlist. We defined a playlist’s dominant genre as the genre that was best represented across all track’s artist’s genres. We found the general genre of “pop” dominated the platform with more than double the # of playlists than any other genre. 
 <br>
 ![TestPlot](images/Picture_2.png)
 <br>
@@ -113,7 +113,7 @@ First I asked how well Viva Latino is separated from Peaceful Piano in the first
 <br>
 ![TestPlot](images/Picture_10.png)
 <br>
-Next, I used a logistic regression classifier to classify tracks as coming from either of the two playlists. The logistic regression classifier performed perfectly differentiating latin pop songs from piano music.
+Next, I used a logistic regression classifier to classify tracks as coming from either of the two playlists. The logistic regression classifier performed perfectly differentiating latin pop songs from piano music (Test Accuracy = 100%).
 <br>
 ![TestPlot](images/Picture_11.png)
 <br>

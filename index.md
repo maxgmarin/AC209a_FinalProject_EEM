@@ -49,7 +49,22 @@ Hello, welcome to our website for our data science final project.
 -  Talk about: Spotify wants to keep users interested in their platform. A way they plan to achieve this is by continuously providing “fresh” content to the user. This keeps the user happy because they are discovering new music they like. 
 
 ## 2. Introduction and Description of Data <a name="paragraph1"></a>
-Some text
+### Obtaining raw data through the Spotify API <a name="raw"></a>
+
+Using the python library Spotipy (a python wrapper for the Spotify API), we obtained complete meta-data for 1587 playlists. All of these playlists are playlists published to the Spotify platform directly by Spotify, and thus their associated username was ‘Spotify’. 
+
+When we started exploring the data available through Spotify API in depth, we first found there was information describing the playlist directly, (such as the number of followers, track IDs, or the number of tracks. We then decided that to obtain significant characteristics for prediction we would need to query information about the tracks that comprise the playlist. The extra layers of information we would need to parse are diagramed below in figure 1.
+
+ADD IMAGE </br>
+
+Figure 1. A rough schematic of the layers of data available through the spotify API
+
+For each of the 1587 playlists we then obtained the meta-data of following associated information:
+
+- All tracks information associated with each playlist
+- All audio features associated with each track
+- All artist information associated with each track
+- All album information associated with each track
 
 
 Here is the Jupyter notebook where all audio features were obtained through the Spotify API: <br>

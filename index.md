@@ -55,7 +55,7 @@ Using the python library Spotipy (a python wrapper for the Spotify API), we obta
 
 When we started exploring the data available through Spotify API in depth, we first found there was information describing the playlist directly, (such as the number of followers, track IDs, or the number of tracks. We then decided that to obtain significant characteristics for prediction we would need to query information about the tracks that comprise the playlist. The extra layers of information we would need to parse are diagramed below in figure 1.
 
-ADD IMAGE </br>
+![TestPlot](images/Picture_1.png)</br> 
 
 Figure 1. A rough schematic of the layers of data available through the spotify API
 
@@ -70,17 +70,32 @@ For each of the 1587 playlists we then obtained the meta-data of following assoc
 Here is the Jupyter notebook where all audio features were obtained through the Spotify API: <br>
 [ParsingAll_AudioFeatures_120417](notebook_Markdown/ParsingAll_AudioFeatures_120417.html)
 
+For details as to the exact metadata available for each playlist, track, artist, or album refer to the Spotify API Object Model documentation. (https://developer.spotify.com/web-api/object-model/)
+
+After obtaining all the above associated information stored for each playlist, the following 
+
+Engineering predictors from the raw playlist meta data
+
+#### Inferring playlist genre <a name="genre"></a>
+A challenge we faced was that the spotify API did not directly provide any genre classification for their playlists. To overcome this we inferred a playlist’s dominant genre by looking at the artist genre’s associated with all tracks in a playlist. We defined a playlist’s dominant genre as the genre that was best represented across all track’s artist’s genres. 
+</br>
+![TestPlot](images/Picture_2.png)
+</br> 
+
 
 ### 2. Exploratory Data Analysis <a name="EDA1"></a>
 
 ![TestPlot](images/test.png)</br>
 This is the distribution of the number of followers for each playlist. We can observe that the distribution is left-skewed, and therefore, requires additional transformations before using it as a response variable. 
 
-</br>
+![TestPlot](images/Picture_4.png)</br>
+
 The Today’s Top Hits is an outlier. It has more than twice the number of followers of RapCavier which is second in number of followers. (Note: there were some playlists that we couldn’t retrieved from spotify api so some of the top playlists may not be present here).
 
-### Sub paragraph <a name="subparagraph1"></a>
-This is a sub paragraph, formatted in heading 3 style
+### Exploration of audio features <a name="Exploration"></a>
+</br>
+![TestPlot](images/Picture_5.png)
+</br> 
 
 
 ## 3. Literature Review/Related Work <a name="literature"></a>
@@ -95,9 +110,22 @@ http://www.sciencedirect.com/science/article/pii/S0020025507004045
 https://github.com/perrygeo/simanneal/blob/master/simanneal/anneal.py
 
 ## 4. Modeling Approach and Project Trajectory <a name="approach"></a>
+Null Model
+We started off our project by building a simple null model that simply just uses the average # of followers of the training set as a prediction for any playlist.
+We found that this null model performed poorly (Test R^2 = 1e-5) and show no predictive ability.
+This provided us with a reference for the performance of a model that uses no predictors. Instead this model is just using the response variables of the training set to predict the response of variables of the test set. 
+All the models that we use from here on out are using the attributes we obtained through the Spotify API to. 
+If the use of a predictor increases test performance by any amount above R^2 =0 this is an indication that this predictor yields some predictive power.
+
+Very simple baseline model (W/ popularity) 
+
+
+
+For the rest of the project we will NOT use any attributes (track, artist, album) that directly tell tell the model anything about popularity or followers. This will result in technically a model with test performance, but we believe that the model that is produced without using popularity/followers will be better identifying attributes that truly make a playlist more popular with users. 
 
 ## 5. Results, Conclusions, and Future Work <a name="results future"></a>
 ### Results <a name="results"></a>
+
 #### Building a playlist <a name="building_playlist"></a>
 ##### Introduction <a name="introduc"></a>
 To suggest a new playlist to a user, we implemented an algorithm called Simulated Annealing. This is a global optimization approach inspired from a concept in statistical physics. The algorithm essentially describes the motion of molecules when it is heated up to large temperature and when the system is cooled. The idea here is that the molecules will reach a global minimum energy point after cooling, and hence, we can use it a global optimization method.  
@@ -107,15 +135,24 @@ In this method, we first fit a logistic regression model with our training set, 
 
 ##### Results <a name="Resultsa"></a>
 
-ADD IMAGE</br>
+</br>
+![TestPlot](images/Picture_6.png)
+</br> 
 
-ADD IMAGE</br>
+</br>
+![TestPlot](images/Picture_7.png)
+</br> 
+
 We can see that our new playlist takes tracks from playlists with relatively low followers if we modify the cost function so that it penalizes more for playlists with large number of followers (blue bar graphs above). We can also see that there are some tracks from the same playlist that was used in the old playlist. This shows that the algorithm doesn’t replace the playlist completely, but I tries to retain certain characters. However, the mean popularity of the tracks in our playlist increased slightly. 
 If we adjust the cost function so that it penalizes more when the playlist is not as successful, we can see that the tracks are obtained from playlists with large number of followers. Note: that the initial playlist used for the two cases were different from each other due to kernel restarting.
 
-ADD IMAGE</br>
+</br>
+![TestPlot](images/Picture_8.png)
+</br> 
 
-ADD IMAGE</br>
+</br>
+![TestPlot](images/Picture_9.png)
+</br> 
 
 
 These plots show that regardless of the cost function the algorithm seeks to generate playlists that have similar mean track popularity.

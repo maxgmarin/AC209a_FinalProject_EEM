@@ -212,11 +212,11 @@ https://github.com/perrygeo/simanneal/blob/master/simanneal/anneal.py
 
 
 ## Jupyter Notebooks
-- [Initial Exploratory Data Analysis of Spotify Data](notebooks/AC209a_Final_ER_Spotify_EDA.html)
-- [Audio Features EDA/Classification of playlist origin](notebooks/1_AudioFeaturesAnalysis_113017.html)
-- [Parsing All Track Audio Features](notebooks/ParsingAll_AudioFeatures_120417.html)
-- [Building a baseline model to predict playlist success](notebooks/prediction_model_creation.html)
-- [Building a playlist ](notebooks/AC209a_Final_ER_Spotify_playlistGeneration.html)
+- [Initial Exploratory Data Analysis of Spotify Data: AC209a_Final_ER_Spotify_EDA.ipynb](notebooks/AC209a_Final_ER_Spotify_EDA.html)
+- [Audio Features EDA/Classification of playlist origin: notebooks/1_AudioFeaturesAnalysis_113017.ipynb](notebooks/1_AudioFeaturesAnalysis_113017.html)
+- [Parsing All Track Audio Features: ParsingAll_AudioFeatures_120417.ipynb](notebooks/ParsingAll_AudioFeatures_120417.html)
+- [Building a baseline model to predict playlist success: rediction_model_creation.ipynb](notebooks/prediction_model_creation.html)
+- [Building a playlist: AC209a_Final_ER_Spotify_playlistGeneration.ipynb](notebooks/AC209a_Final_ER_Spotify_playlistGeneration.html)
 
 
 

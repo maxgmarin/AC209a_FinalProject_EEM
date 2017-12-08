@@ -93,11 +93,35 @@ This is the distribution of the number of followers for each playlist. We can ob
 The Today’s Top Hits is an outlier. It has more than twice the number of followers of RapCavier which is second in number of followers. (Note: there were some playlists that we couldn’t retrieved from spotify api so some of the top playlists may not be present here).
 
 ### Exploration of audio features <a name="Exploration"></a>
+Next, we began to explore audio feature characteristics of all 63902 songs present in our dataset.  Our interest in using audio features come from the fact that audio features are blind to the actual popularity of specific artists or tracks.
+
+The question we asked of the audio features is what is the correlation between all 13 audio features available for each track. What we found was most audio features were not highly correlated in any way (with a few exceptions). Energy and loudness appear to have a strong positive correlation, while energy and acousticness have a strong negative correlation. In general the lack of extremely high correlation between audio features indicates that they are all likely to be informative to our model. 
 <br>
 ![TestPlot](images/Picture_5.png)
 <br>
 
+Next, we looked into the potential for audio features to allow for classification of songs as belonging to specific genres/playlists. To test this we started 3 sets of tracks:
 
+Hot Country: 52 tracks
+Viva Latino: 50 tracks
+Peaceful Piano: 162 tracks
+
+First I asked how well Viva Latino is separated from Peaceful Piano in the first two principal components of the data. I found that they very clearly separated, 
+<br>
+![TestPlot](images/Picture_10.png)
+<br>
+Next, I used a logistic regression classifier to classify tracks as coming from either of the two playlists. The logistic regression classifier performed perfectly differentiating latin pop songs from piano music.
+<br>
+![TestPlot](images/Picture_11.png)
+<br>
+TEXT
+<br>
+![TestPlot](images/Picture_12.png)
+<br>
+
+<br>
+![TestPlot](images/Picture_13.png)
+<br>
 ## 3. Literature Review/Related Work <a name="literature"></a>
 https://towardsdatascience.com/is-my-spotify-music-boring-an-analysis-involving-music-data-and-machine-learning-47550ae931de 
 

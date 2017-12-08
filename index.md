@@ -148,8 +148,13 @@ Linear regression with Lasso regression, using the square root-transformed respo
 For the rest of the project we will NOT use any attributes (track, artist, album) that directly tell tell the model anything about popularity or followers. This will result in technically a model with test performance, but we believe that the model that is produced without using popularity/followers will be better identifying attributes that truly make a playlist more popular with users. So, we tried using the square root transformed response variable, and building lasso regression model. Our R2 value was less than 0.
 So, we decided to remove spotify-featured playlists from the dataset. Using playlists that have been featured on spotify might be biasing our dataset. There may be a trend between the features of a playlist and its number of followers that is obscured by the inflation playlist followers gets after it has been featured. Since the distribution of these playlist follower values was different, we tried building models using both un-transformed and transformed response variables. Interestingly, we found we got an R2 value less than 0 for the transformed response variables, but we got an R2 value of 0.11 when we used un-transformed response variable. Again, we used lasso regression.  Unfortunately, we saw that there were few non-zero coefficients. 
 <br>
-![TestPlot](images/Picture_15.png)
+![TestPlot](images/Picture_16.png)
 <br>
+We tested this model on the test set and found an R2 value of 0.13, which we thought was quite good compared to our null model, considering we didn’t use any popularities, followers, or spotify featured/recommended parameters for prediction. We also tried some classification modeling predicting successful or not successful playlists, when tested on our test set, we saw and AUC on our ROC curve of 0.77, again, this model used the same features. 
+<br>
+![TestPlot](images/Picture_17.png)
+<br>
+
 In the future, we would have liked to have spent more time engineering features, and preferably focusing on the audio features.   
 
 ## 4. Results, Conclusions, and Future Work <a name="results future"></a>

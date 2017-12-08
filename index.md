@@ -210,24 +210,13 @@ http://www.sciencedirect.com/science/article/pii/S0020025507004045
 
 https://github.com/perrygeo/simanneal/blob/master/simanneal/anneal.py
 
-- [Project Overview](pages/overview.html)
-- [Data sources/processing](pages/independent_site.html)
-- [Exploratory Data Analysis of Spotify Data](pages/user_site.html)
-- [Exploratory Data Analysis of Spotify Data](pages/project_site.html)
-- [Building a baseline model to predict playlist success](pages/nojekyll.html)
-- [Improving out model](pages/local_test.html)
-- [Prediction of song genre based on audio features](pages/resources.html)
 
-
-
-
-
-
-
-
-
-
-
+## Jupyter Notebooks
+- [Initial Exploratory Data Analysis of Spotify Data](notebooks/AC209a_Final_ER_Spotify_EDA.html)
+- [Audio Features EDA/Classification of playlist origin](notebooks/1_AudioFeaturesAnalysis_113017.html)
+- [Parsing All Track Audio Features](notebooks/ParsingAll_AudioFeatures_120417.html)
+- [Building a baseline model to predict playlist success](notebooks/prediction_model_creation.html)
+- [Building a playlist ](notebooks/AC209a_Final_ER_Spotify_playlistGeneration.html)
 
 
 

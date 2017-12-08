@@ -56,7 +56,7 @@ Here is the Jupyter notebook where all audio features were obtained through the 
 
 ### 2. Exploratory Data Analysis <a name="EDA1"></a>
 
-![TestPlot](images/test.png)
+![TestPlot](images/test.png)</br>
 This is the distribution of the number of followers for each playlist. We can observe that the distribution is left-skewed, and therefore, requires additional transformations before using it as a response variable. 
 
 ### Sub paragraph <a name="subparagraph1"></a>

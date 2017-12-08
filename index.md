@@ -16,4 +16,63 @@ Hello, welcome to our website for our data science final project.
 - [Improving out model](pages/local_test.html)
 - [Prediction of song genre based on audio features](pages/resources.html)
 
+<br>
+<br>
+<br>
+
+# Table of contents
+1. [Problem Statement and Motivation](#Problem_Statement)
+
+2. [Introduction and Description of Data](#introduction)
+    1. [Sub paragraph](#subparagraph1)
+
+3. [Literature Review/Related Work](#paragraph2)
+
+4. [Modeling Approach and Project Trajectory](#paragraph2)
+
+5. [Results, Conclusions, and Future Work](#paragraph2)
+    1. [Results](#subparagraph1)
+    1. [Conclusions](#subparagraph1)
+    1. [Future Work](#subparagraph1)
+
+6. [References](#paragraph2)
+
+
+## Problem Statement and Motivation <a name="Problem_Statement"></a>
+Some introduction text, formatted in heading 2 style
+
+## Introduction and Description of Data <a name="paragraph1"></a>
+The first paragraph text
+
+
+
+### Sub paragraph <a name="subparagraph1"></a>
+This is a sub paragraph, formatted in heading 3 style
+
+
+
+
+## Another paragraph <a name="paragraph2"></a>
+The second paragraph text
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 

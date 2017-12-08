@@ -59,11 +59,23 @@ Here is the Jupyter notebook where all audio features were obtained through the 
 ![TestPlot](images/test.png)</br>
 This is the distribution of the number of followers for each playlist. We can observe that the distribution is left-skewed, and therefore, requires additional transformations before using it as a response variable. 
 
+</br>
+The Today’s Top Hits is an outlier. It has more than twice the number of followers of RapCavier which is second in number of followers. (Note: there were some playlists that we couldn’t retrieved from spotify api so some of the top playlists may not be present here).
+
 ### Sub paragraph <a name="subparagraph1"></a>
 This is a sub paragraph, formatted in heading 3 style
 
 
 ## 3. Literature Review/Related Work <a name="literature"></a>
+https://towardsdatascience.com/is-my-spotify-music-boring-an-analysis-involving-music-data-and-machine-learning-47550ae931de 
+
+http://spotipy.readthedocs.io/en/latest/#installation 
+
+https://developer.spotify.com/web-api/tutorial/ 
+
+http://www.sciencedirect.com/science/article/pii/S0020025507004045
+
+https://github.com/perrygeo/simanneal/blob/master/simanneal/anneal.py
 
 ## 4. Modeling Approach and Project Trajectory <a name="approach"></a>
 

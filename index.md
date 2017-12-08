@@ -135,8 +135,8 @@ We found that this null model performed poorly (Test R^2 = -1e-2) and show no pr
 This provided us with a reference for the performance of a model that uses no predictors. Instead this model is just using the response variables of the training set to predict the response of variables of the test set. If the use of a predictor increases test performance by any amount above R^2 =0 this is an indication that this predictor yields some predictive power.
 ### Regression Models <a name="regression"></a>
 
-	We explored a simple linear regression model, and found the results poor (R2 less than 0 for the validation set). We determined that we needed to use dimensionality reduction, so we tried Lasso and Ridge regression techniques, and also PCA. Ridge and Lasso regression gave R2 values around 0.2, much better than baseline! 
-	We wanted to also explore if transforming the response variable would impact our model’s predictive success, since we saw that the playlist followers appeared to have a skewed distribution (as shown in exploratory data analysis). We tried the square root, cubic root, log (base 10), and inverse of the response variable and trained models. We saw that the R2 values for Ridge and Lasso Regression were higher given a square root or cubic root transformation. The best performance was Lasso Regression using a transformed response variable of square root. 
+We explored a simple linear regression model, and found the results poor (R2 less than 0 for the validation set). We determined that we needed to use dimensionality reduction, so we tried Lasso and Ridge regression techniques, and also PCA. Ridge and Lasso regression gave R2 values around 0.2, much better than baseline! 
+We wanted to also explore if transforming the response variable would impact our model’s predictive success, since we saw that the playlist followers appeared to have a skewed distribution (as shown in exploratory data analysis). We tried the square root, cubic root, log (base 10), and inverse of the response variable and trained models. We saw that the R2 values for Ridge and Lasso Regression were higher given a square root or cubic root transformation. The best performance was Lasso Regression using a transformed response variable of square root. 
 <br>
 ![TestPlot](images/Picture_14.png)
 <br>
@@ -150,6 +150,7 @@ So, we decided to remove spotify-featured playlists from the dataset. Using play
 <br>
 ![TestPlot](images/Picture_15.png)
 <br>
+In the future, we would have liked to have spent more time engineering features, and preferably focusing on the audio features.   
 
 ## 4. Results, Conclusions, and Future Work <a name="results future"></a>
 ### Results <a name="results"></a>

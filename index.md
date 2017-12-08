@@ -22,29 +22,41 @@ Hello, welcome to our website for our data science final project.
 1. [Problem Statement and Motivation](#Problem_Statement)
 
 2. [Introduction and Description of Data](#introduction)
-    1. [Sub paragraph](#subparagraph1)
 
+    1. [Introduction](#intro1)
 
-Here is the Jupyter notebook where all audio features were obtained through the Spotify API: <br>
-[ParsingAll_AudioFeatures_120417](pages/ParsingAll_AudioFeatures_120417.html)
+    2. [Exploratory Data Analysis](#EDA)
+
 
 3. [Literature Review/Related Work](#paragraph2)
 
 4. [Modeling Approach and Project Trajectory](#paragraph2)
 
+
+
 5. [Results, Conclusions, and Future Work](#paragraph2)
     1. [Results](#subparagraph1)
-    1. [Conclusions](#subparagraph1)
-    1. [Future Work](#subparagraph1)
+    2. [Conclusions](#subparagraph1)
+    3. [Future Work](#subparagraph1)
+
 
 6. [References](#paragraph2)
 
 
-## Problem Statement and Motivation <a name="Problem_Statement"></a>
-Some introduction text, formatted in heading 2 style
+## 1. Problem Statement and Motivation <a name="Problem_Statement"></a>
+Some text
 
-## Introduction and Description of Data <a name="paragraph1"></a>
-The first paragraph text
+## 2. Introduction and Description of Data <a name="paragraph1"></a>
+Some text
+
+
+Here is the Jupyter notebook where all audio features were obtained through the Spotify API: <br>
+[ParsingAll_AudioFeatures_120417](pages/ParsingAll_AudioFeatures_120417.html)
+
+
+### 2. Exploratory Data Analysis <a name="EDA1"></a>
+Some text
+![Drag Racing](images/testplot_1.png)
 
 
 

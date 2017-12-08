@@ -8,6 +8,7 @@ description: Predictive modeling of playlist success
 # AC209a Final Report: Predicting playlist success on the Spotify platform
 
 #### Group Members: Max, Erica, and Elmer
+#### Group Number: 58
 
 
 
@@ -44,9 +45,12 @@ Hello, welcome to our website for our data science final project.
 
 
 ## 1. Problem Statement and Motivation <a name="Problem_Statement"></a>
--  Goal: Our primary goal is to construct a predictive model for playlist success (as measured by # of followers).
+Our project had two specific goals:
+- To build a model for predicting playlist success (with the # of playlist followers as a measure of success)
+- Develop a method to generate new “fresh” playlists for a user based on playlist they currently like. 
 
--  Talk about: Spotify wants to keep users interested in their platform. A way they plan to achieve this is by continuously providing “fresh” content to the user. This keeps the user happy because they are discovering new music they like. 
+Motivation:
+As a company, Spotify makes profit by having users subscribe to their platform. Spotify therefore wants to keep their users interested in their platform. A way they plan to achieve this is by continuously providing “fresh” new content (songs and podcasts) to the user. This keeps the user happy because they can justify their subscription with the fact that spotify is providing a service of providing new interesting content. Towards this goal, we want to develop methodology to interpreting what factors are important for making playlists that are successful (have a large # of users subscribing/following)
 
 ## 2. Introduction and Description of Data <a name="paragraph1"></a>
 ### Obtaining raw data through the Spotify API <a name="raw"></a>
@@ -61,9 +65,9 @@ Figure 1. A rough schematic of the layers of data available through the spotify 
 
 For each of the 1587 playlists we then obtained the meta-data of following associated information:
 
-- All tracks information associated with each playlist
-- All audio features associated with each track
-- All artist information associated with each track
+- All tracks information associated with each playlist ( 63902 tracks)
+- All audio features associated with each track (63902 tracks )
+- All artist information associated with each track ( 20139 artists)
 - All album information associated with each track
 
 
@@ -72,12 +76,12 @@ Here is the Jupyter notebook where all audio features were obtained through the 
 
 For details as to the exact metadata available for each playlist, track, artist, or album refer to the Spotify API Object Model documentation. (https://developer.spotify.com/web-api/object-model/)
 
-After obtaining all the above associated information stored for each playlist, the following 
 
-Engineering predictors from the raw playlist meta data
+#### Creating predictors from the raw API data <a name="rawapi"></a>
+
 
 #### Inferring playlist genre <a name="genre"></a>
-A challenge we faced was that the spotify API did not directly provide any genre classification for their playlists. To overcome this we inferred a playlist’s dominant genre by looking at the artist genre’s associated with all tracks in a playlist. We defined a playlist’s dominant genre as the genre that was best represented across all track’s artist’s genres. 
+A challenge we faced was that the spotify API did not directly provide any genre classification for their playlists. To overcome this we inferred a playlist’s dominant genre by looking at the artist genre’s associated with all tracks in a playlist. We defined a playlist’s dominant genre as the genre that was best represented across all track’s artist’s genres. We found the general genre of “pop” dominated the platform with more than double the # of playlists than any other genre. 
 <br>
 ![TestPlot](images/Picture_2.png)
 <br>
@@ -110,11 +114,12 @@ First I asked how well Viva Latino is separated from Peaceful Piano in the first
 <br>
 ![TestPlot](images/Picture_10.png)
 <br>
-Next, I used a logistic regression classifier to classify tracks as coming from either of the two playlists. The logistic regression classifier performed perfectly differentiating latin pop songs from piano music.
+Next, I used a logistic regression classifier to classify tracks as coming from either of the two playlists. The logistic regression classifier performed perfectly differentiating latin pop songs from piano music (Test Accuracy = 100%).
 <br>
 ![TestPlot](images/Picture_11.png)
 <br>
-TEXT
+I next performed a similar comparison of Viva Latino and Hot Country. I found that latin pop music was qualitatively not as separable, but still distinguishable in PCA space. The logistic regression classifier performed decently (Test Accuracy = 88.2%).
+
 <br>
 ![TestPlot](images/Picture_12.png)
 <br>
@@ -122,34 +127,32 @@ TEXT
 <br>
 ![TestPlot](images/Picture_13.png)
 <br>
-## 3. Literature Review/Related Work <a name="literature"></a>
-https://towardsdatascience.com/is-my-spotify-music-boring-an-analysis-involving-music-data-and-machine-learning-47550ae931de 
 
-http://spotipy.readthedocs.io/en/latest/#installation 
-
-https://developer.spotify.com/web-api/tutorial/ 
-
-http://www.sciencedirect.com/science/article/pii/S0020025507004045
-
-https://github.com/perrygeo/simanneal/blob/master/simanneal/anneal.py
-
-## 4. Modeling Approach and Project Trajectory <a name="approach"></a>
-Null Model
+## 3. Modeling Approach and Project Trajectory <a name="approach"></a>
+### Null Model <a name="null"></a>
 We started off our project by building a simple null model that simply just uses the average # of followers of the training set as a prediction for any playlist.
-We found that this null model performed poorly (Test R^2 = 1e-5) and show no predictive ability.
-This provided us with a reference for the performance of a model that uses no predictors. Instead this model is just using the response variables of the training set to predict the response of variables of the test set. 
-All the models that we use from here on out are using the attributes we obtained through the Spotify API to. 
-If the use of a predictor increases test performance by any amount above R^2 =0 this is an indication that this predictor yields some predictive power.
+We found that this null model performed poorly (Test R^2 = -1e-2) and show no predictive ability.
+This provided us with a reference for the performance of a model that uses no predictors. Instead this model is just using the response variables of the training set to predict the response of variables of the test set. If the use of a predictor increases test performance by any amount above R^2 =0 this is an indication that this predictor yields some predictive power.
+### Regression Models <a name="regression"></a>
 
-Very simple baseline model (W/ popularity) 
+	We explored a simple linear regression model, and found the results poor (R2 less than 0 for the validation set). We determined that we needed to use dimensionality reduction, so we tried Lasso and Ridge regression techniques, and also PCA. Ridge and Lasso regression gave R2 values around 0.2, much better than baseline! 
+	We wanted to also explore if transforming the response variable would impact our model’s predictive success, since we saw that the playlist followers appeared to have a skewed distribution (as shown in exploratory data analysis). We tried the square root, cubic root, log (base 10), and inverse of the response variable and trained models. We saw that the R2 values for Ridge and Lasso Regression were higher given a square root or cubic root transformation. The best performance was Lasso Regression using a transformed response variable of square root. 
+<br>
+![TestPlot](images/Picture_14.png)
+<br>
+Linear regression with Lasso regression, using the square root-transformed response variable seems like our best model. But we want to know how it's working - what are the important features? For linear regression, we found 19 parameters with a p value of <0.05, mostly containing genre information, audio feature information, and some spotify features, such as recommendations. The most significant features by far (p values 1e-16) were for newly-released tracks (a feature we engineered from date of release) and one for spotify-featured playlists. The using spotify's featured playlists as a parameter seems like a poor way to move forward with using this model to generate a successful playlist, since we can't control whether or not spotify features it, and that seems cheap anyway, we want our playlist to be successful because it's good, not because spotify features it. We also looked at the nonzero coefficients from Lasso regression, seen below. There were some different trends, but we still saw that spotify’s featured playlists dominated (the third-largest coefficient). 
 
+<br>
+![TestPlot](images/Picture_15.png)
+<br>
+For the rest of the project we will NOT use any attributes (track, artist, album) that directly tell tell the model anything about popularity or followers. This will result in technically a model with test performance, but we believe that the model that is produced without using popularity/followers will be better identifying attributes that truly make a playlist more popular with users. So, we tried using the square root transformed response variable, and building lasso regression model. Our R2 value was less than 0.
+So, we decided to remove spotify-featured playlists from the dataset. Using playlists that have been featured on spotify might be biasing our dataset. There may be a trend between the features of a playlist and its number of followers that is obscured by the inflation playlist followers gets after it has been featured. Since the distribution of these playlist follower values was different, we tried building models using both un-transformed and transformed response variables. Interestingly, we found we got an R2 value less than 0 for the transformed response variables, but we got an R2 value of 0.11 when we used un-transformed response variable. Again, we used lasso regression.  Unfortunately, we saw that there were few non-zero coefficients. 
+<br>
+![TestPlot](images/Picture_15.png)
+<br>
 
-
-For the rest of the project we will NOT use any attributes (track, artist, album) that directly tell tell the model anything about popularity or followers. This will result in technically a model with test performance, but we believe that the model that is produced without using popularity/followers will be better identifying attributes that truly make a playlist more popular with users. 
-
-## 5. Results, Conclusions, and Future Work <a name="results future"></a>
+## 4. Results, Conclusions, and Future Work <a name="results future"></a>
 ### Results <a name="results"></a>
-
 #### Building a playlist <a name="building_playlist"></a>
 ##### Introduction <a name="introduc"></a>
 To suggest a new playlist to a user, we implemented an algorithm called Simulated Annealing. This is a global optimization approach inspired from a concept in statistical physics. The algorithm essentially describes the motion of molecules when it is heated up to large temperature and when the system is cooled. The idea here is that the molecules will reach a global minimum energy point after cooling, and hence, we can use it a global optimization method.  
@@ -172,7 +175,7 @@ If we adjust the cost function so that it penalizes more when the playlist is no
 
 <br>
 ![TestPlot](images/Picture_8.png)
-</br> 
+<br> 
 
 <br>
 ![TestPlot](images/Picture_9.png)
@@ -184,25 +187,23 @@ These plots show that regardless of the cost function the algorithm seeks to gen
 
 ### Future Work <a name="futurework"></a>
 #### Improving our predictive model for playlist success: <a name="predictivemodel"></a>
-TEXT
+A major challenge that we faced when developing a predictive model for playlist success is that a playlists success on the Spotify platform is largely dependent on how well advertised it is on the Spotify main page and in different genre categories. This creates a platform where there is preferential exposure for specific artists. An interesting future direction for this work would be to expand the analysis to playlists created by spotify users. This would provide 2 benefits over using Spotify’s public playlists. 1) It would mean that their would be less bias in exposure to the Spotify user base, and 2) there are several orders of magnitude more playlists published by the Spotify user base.
 
 #### Building a Playlist: <a name="buildplaylist"></a>
 The approach we’ve taken was somewhat naive. We worked under the assumption that the spotify user has an eclectic taste for tracks which is why we seeded a randomly generated playlist to our algorithm. In reality, we know individuals want tracks related to the ones they liked. Therefore, for future work, we should limit our tracks we incorporate to our playlist to ones that are related to each other. The similar tracks can be obtained through spotify recommendations or we can take a mathematical approach in which calculate the “distance” between tracks using metrics such as Frobenius Distance. Furthermore, there are several parameters that we can tweak to generate a better playlist such as the “temperature” and “cooling length”. For example, increasing the cooling time will give our system enough time to find the global minimum. Finally, the model we used for generating the playlist just uses a subset of all our features. In the future, we can rerun this algorithm with an expanded feature and also try out different classification models other than the one used in the algorithm.
 
-## Another paragraph <a name="paragraph2"></a>
-The second paragraph text
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
-<br>
+
+## 5. Literature Review/Related Work <a name="literature"></a>
+https://towardsdatascience.com/is-my-spotify-music-boring-an-analysis-involving-music-data-and-machine-learning-47550ae931de 
+
+http://spotipy.readthedocs.io/en/latest/#installation 
+
+https://developer.spotify.com/web-api/tutorial/ 
+
+http://www.sciencedirect.com/science/article/pii/S0020025507004045
+
+https://github.com/perrygeo/simanneal/blob/master/simanneal/anneal.py
+
 - [Project Overview](pages/overview.html)
 - [Data sources/processing](pages/independent_site.html)
 - [Exploratory Data Analysis of Spotify Data](pages/user_site.html)

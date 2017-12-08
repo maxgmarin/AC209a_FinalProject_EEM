@@ -44,9 +44,12 @@ Hello, welcome to our website for our data science final project.
 
 
 ## 1. Problem Statement and Motivation <a name="Problem_Statement"></a>
--  Goal: Our primary goal is to construct a predictive model for playlist success (as measured by # of followers).
+Our project had two specific goals:
+- To build a model for predicting playlist success (with the # of playlist followers as a measure of success)
+- Develop a method to generate new “fresh” playlists for a user based on playlist they currently like. 
 
--  Talk about: Spotify wants to keep users interested in their platform. A way they plan to achieve this is by continuously providing “fresh” content to the user. This keeps the user happy because they are discovering new music they like. 
+Motivation:
+As a company, Spotify makes profit by having users subscribe to their platform. Spotify therefore wants to keep their users interested in their platform. A way they plan to achieve this is by continuously providing “fresh” new content (songs and podcasts) to the user. This keeps the user happy because they can justify their subscription with the fact that spotify is providing a service of providing new interesting content. Towards this goal, we want to develop methodology to interpreting what factors are important for making playlists that are successful (have a large # of users subscribing/following)
 
 ## 2. Introduction and Description of Data <a name="paragraph1"></a>
 ### Obtaining raw data through the Spotify API <a name="raw"></a>

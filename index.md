@@ -138,18 +138,19 @@ http://www.sciencedirect.com/science/article/pii/S0020025507004045
 https://github.com/perrygeo/simanneal/blob/master/simanneal/anneal.py
 
 ## 4. Modeling Approach and Project Trajectory <a name="approach"></a>
-Null Model
+### Null Model <a name="null"></a>
 We started off our project by building a simple null model that simply just uses the average # of followers of the training set as a prediction for any playlist.
-We found that this null model performed poorly (Test R^2 = 1e-5) and show no predictive ability.
-This provided us with a reference for the performance of a model that uses no predictors. Instead this model is just using the response variables of the training set to predict the response of variables of the test set. 
-All the models that we use from here on out are using the attributes we obtained through the Spotify API to. 
-If the use of a predictor increases test performance by any amount above R^2 =0 this is an indication that this predictor yields some predictive power.
+We found that this null model performed poorly (Test R^2 = -1e-2) and show no predictive ability.
+This provided us with a reference for the performance of a model that uses no predictors. Instead this model is just using the response variables of the training set to predict the response of variables of the test set. If the use of a predictor increases test performance by any amount above R^2 =0 this is an indication that this predictor yields some predictive power.
+### Regression Models <a name="regression"></a>
 
-Very simple baseline model (W/ popularity) 
+<br>
+![TestPlot](images/Picture_14.png)
+<br>
 
+	We explored a simple linear regression model, and found the results poor (R2 less than 0 for the validation set). We determined that we needed to use dimensionality reduction, so we tried Lasso and Ridge regression techniques, and also PCA. Ridge and Lasso regression gave R2 values around 0.2, much better than baseline! 
+	We wanted to also explore if transforming the response variable would impact our model’s predictive success, since we saw that the playlist followers appeared to have a skewed distribution (as shown in exploratory data analysis). We tried the square root, cubic root, log (base 10), and inverse of the response variable and trained models. We saw that the R2 values for Ridge and Lasso Regression were higher given a square root or cubic root transformation. The best performance was Lasso Regression using a transformed response variable of square root. 
 
-
-For the rest of the project we will NOT use any attributes (track, artist, album) that directly tell tell the model anything about popularity or followers. This will result in technically a model with test performance, but we believe that the model that is produced without using popularity/followers will be better identifying attributes that truly make a playlist more popular with users. 
 
 ## 5. Results, Conclusions, and Future Work <a name="results future"></a>
 ### Results <a name="results"></a>
@@ -176,7 +177,7 @@ If we adjust the cost function so that it penalizes more when the playlist is no
 
 <br>
 ![TestPlot](images/Picture_8.png)
-</br> 
+<br> 
 
 <br>
 ![TestPlot](images/Picture_9.png)
